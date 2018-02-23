@@ -1,10 +1,13 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,19 +25,20 @@ public class Player {
 	private String phoneNumber;
 	@Column(name = "screenName")
 	private String screenName;
-	@Column(name = "teamId")
-	private int teamId;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "teamId")
+	private Team team;
 	
 	public Player() {
 		
 	}
 	
-	public Player(String fn, String ln, String pn, String sn, int tId) {
-		this.firstName = fn;
-		this.lastName = ln;
-		this.phoneNumber = pn;
-		this.screenName = sn;
-		this.teamId = tId;
+	public Player(String fn, String ln, String pn, String sn, Team team) {
+		this.setFirstName(fn);
+		this.setLastName(ln);
+		this.setPhoneNumber(pn);
+		this.setScreenName(sn);
+		this.setTeam(team);
 	}
 
 
@@ -74,12 +78,11 @@ public class Player {
 		return playerId;
 	}
 	
-	public void setTeamId(int teamId) {
-		this.teamId = teamId;
+	public Team getTeam() {
+		return team;
 	}
-
-	public int getTeamId() {
-		return teamId;
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
 }
