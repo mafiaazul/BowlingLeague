@@ -25,12 +25,14 @@ public class Player {
 	private String phoneNumber;
 	@Column(name = "screenName")
 	private String screenName;
+	@ManyToOne
+	@JoinColumn(name = "teamId")
+	private Team team; 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "teamId")
 	private Team team;
 	
 	public Player() {
-		
 	}
 	
 	public Player(String fn, String ln, String pn, String sn, Team team) {
@@ -41,6 +43,13 @@ public class Player {
 		this.setTeam(team);
 	}
 
+	public Player(String firstName, String lastName, String phoneNumber, String screenName) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.screenName = screenName;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -80,6 +89,12 @@ public class Player {
 	
 	public Team getTeam() {
 		return team;
+		 	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+		 	}
+
 	}
 	public void setTeam(Team team) {
 		this.team = team;
