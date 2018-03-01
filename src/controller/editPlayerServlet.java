@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Player;
-import model.Team;
 
 /**
- * Servlet implementation class addPlayerServlett
+ * Servlet implementation class editPlayerServlet
  */
-@WebServlet("/addPlayerServlet")
-public class addPlayerServlet extends HttpServlet {
+@WebServlet("/editPlayerServlet")
+public class editPlayerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public addPlayerServlet() {
+    public editPlayerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +29,19 @@ public class addPlayerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String fn = request.getParameter("firstName");
-		String ln = request.getParameter("lastName");
-		String pn = request.getParameter("phoneNumber");
-		String sn = request.getParameter("screenName");
-		String tn = request.getParameter("teamName");
-		
-		Team team;
-		TeamHelper th = new TeamHelper();
+		String act = request.getParameter("doThisToPlayer");
 		PlayerHelper ph = new PlayerHelper();
-		if (th.findTeamByName(tn) == null) {
-			team = new Team(tn);
-			th.insertTeam(team);
-		} else {
-			team = th.findTeamByName(tn);
+		if (act == null) {
+			getServletContext().getRequestDispatcher("/viewAllPlayersServlet").forward(request, response);
 		}
-		Player player = new Player(fn, ln, pn, sn, team);
-		ph.insertPlayer(player);
-		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+		else if (act.equals("Delete Player")) {
+			Integer tempId = Integer.parseInt(request.getParameter("id"));
+			Player playerToDelete = ph.searchForPlayerById(tempId);
+			ph.deletePlayer(playerToDelete);
+			getServletContext().getRequestDispatcher("/viewPlayersServlet").forward(request, response);
+		} else if (act.equals("Add new Player")) {
+			getServletContext().getRequestDispatcher("/addPlayer.html").forward(request, response);
+		}
 	}
 
 }

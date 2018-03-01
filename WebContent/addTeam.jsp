@@ -14,6 +14,6 @@
 		Enter Preferred Night: <input type="text" name="preferredNight" size="10"><br />
 		<input type="submit" value="Add Team" />
 	</form>
-	
+	<a href = "index.html">Back to League Menu</a><br />
 </body>
 </html>

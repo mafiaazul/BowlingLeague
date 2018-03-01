@@ -1,6 +1,5 @@
 package model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,28 +26,17 @@ public class Player {
 	private String screenName;
 	@ManyToOne
 	@JoinColumn(name = "teamId")
-	private Team team; 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "teamId")
 	private Team team;
-	
+
 	public Player() {
 	}
-	
+
 	public Player(String fn, String ln, String pn, String sn, Team team) {
 		this.setFirstName(fn);
 		this.setLastName(ln);
 		this.setPhoneNumber(pn);
 		this.setScreenName(sn);
 		this.setTeam(team);
-	}
-
-	public Player(String firstName, String lastName, String phoneNumber, String screenName) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phoneNumber = phoneNumber;
-		this.screenName = screenName;
 	}
 
 	public String getFirstName() {
@@ -86,18 +74,12 @@ public class Player {
 	public int getPlayerId() {
 		return playerId;
 	}
-	
+
 	public Team getTeam() {
 		return team;
-		 	}
+	}
 
 	public void setTeam(Team team) {
 		this.team = team;
-		 	}
-
 	}
-	public void setTeam(Team team) {
-		this.team = team;
-	}
-
 }
