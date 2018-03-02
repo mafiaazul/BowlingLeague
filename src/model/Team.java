@@ -8,22 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="team")
+@Table(name = "team")
 public class Team {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="teamId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "teamId")
 	private int teamId;
-	@Column(name="teamName")
+	@Column(name = "teamName")
 	private String teamName;
-	@Column(name="teamType")
+	@Column(name = "teamType")
 	private String teamType;
-	@Column(name="preferredNight")
+	@Column(name = "preferredNight")
 	private String preferredNight;
-	
+
 	public Team() {
-		
+
+	}
+	
+	public Team(String teamName) {
+		this.setTeamName(teamName);
 	}
 
 	public Team(String teamName, String teamType, String preferredNight) {
@@ -32,12 +36,10 @@ public class Team {
 		this.preferredNight = preferredNight;
 	}
 
-
-
 	public int getTeamId() {
 		return teamId;
 	}
-	
+
 	public String getTeamName() {
 		return teamName;
 	}
