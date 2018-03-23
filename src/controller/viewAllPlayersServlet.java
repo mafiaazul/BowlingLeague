@@ -28,11 +28,13 @@ public class viewAllPlayersServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PlayerHelper ph = new PlayerHelper();
+		
 		request.setAttribute("allPlayers", ph.showAllPlayers());
+		
 		if (ph.showAllPlayers().isEmpty()) {
 			getServletContext().getRequestDispatcher("/addPlayer.html").forward(request, response);
 		}
-		getServletContext().getRequestDispatcher("/viewPlayers.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/viewAllPlayers.jsp").forward(request, response);
 	}
 
 	/**

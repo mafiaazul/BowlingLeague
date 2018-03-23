@@ -38,7 +38,7 @@ public class editPlayerServlet extends HttpServlet {
 			Integer tempId = Integer.parseInt(request.getParameter("id"));
 			Player playerToDelete = ph.searchForPlayerById(tempId);
 			ph.deletePlayer(playerToDelete);
-			getServletContext().getRequestDispatcher("/viewPlayersServlet").forward(request, response);
+			getServletContext().getRequestDispatcher("/viewAllPlayersServlet").forward(request, response);
 		} else if (act.equals("Add new Player")) {
 			getServletContext().getRequestDispatcher("/addPlayer.html").forward(request, response);
 		}
